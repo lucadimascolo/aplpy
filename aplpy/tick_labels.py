@@ -81,6 +81,28 @@ class TickLabels(object):
             self._hours[self.y] = 'h' in yformat
 
     @auto_refresh
+    def set_xrotation(self,rotation):
+        """
+        Set the direction of the y-axis tick labels.
+        """
+        self._ax.figure.canvas.draw()
+        self._ax.tick_params(axis='x',rotation=rotation)
+
+        xlabels = [tl.get_text() for tl in self._ax.get_xticklabels(which='both')]
+        self._ax.set_xticklabels(labels=xlabels,fontdict={'horizontalignment':'center'})
+
+    @auto_refresh
+    def set_yrotation(self,rotation):
+        """
+        Set the direction of the y-axis tick labels.
+        """
+        self._ax.figure.canvas.draw()
+        self._ax.tick_params(axis='y',rotation=rotation)
+
+        ylabels = [tl.get_text() for tl in self._ax.get_yticklabels(which='both')]
+        self._ax.set_yticklabels(labels=ylabels,fontdict={'verticalalignment':'center'})
+
+    @auto_refresh
     def set_style(self, style):
         """
         Set the format of the x-axis tick labels.
